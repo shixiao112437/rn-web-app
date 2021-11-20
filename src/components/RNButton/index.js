@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
 class RNButton extends Component {
   render() {
     return (
-      <TouchableOpacity onPress={this.props.btnEvent}>
+      <TouchableOpacity disabled={this.props.disabled} onPress={this.props.btnEvent}>
         <LinearGradient
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}
@@ -44,6 +44,7 @@ RNButton.propTypes = {
   btnEvent: PropTypes.func,
   title: PropTypes.string,
   textColor: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 RNButton.defaultProps = {
   btnEvent: () => {
@@ -51,5 +52,6 @@ RNButton.defaultProps = {
   },
   title: '渐变button',
   textColor: 'red',
+  disabled:false
 };
 export default RNButton;

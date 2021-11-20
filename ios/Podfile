@@ -12,6 +12,8 @@ target 'webApp' do
     :hermes_enabled => false
   )
 
+  pod 'react-native-amap-geolocation', :path => '../node_modules/react-native-amap-geolocation'
+
   target 'webAppTests' do
     inherit! :complete
     # Pods for testing

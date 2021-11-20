@@ -32,26 +32,52 @@ const styly = StyleSheet.create({
   focusCell: {
     borderColor: '#dfc026',
   },
-  codeTitle:{
-    fontSize:20,
-    fontWeight:"700",
-    marginBottom:10,
+  codeTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 10,
   },
-  codeTip:{
-    fontSize:16
-  }
+  codeTip: {
+    fontSize: 16,
+  },
 });
 export default class Login extends Component {
   state = {
     tel: '15830104417',
     isShow: true,
     code: '',
+    btnText: '重新获取',
+    isLoading: false,
   };
   getPhoneNum = () => {
-    setTimeout(() => {
-      this.setState({isShow: false});
+    alert('获取手机验证码');
+    this.setState({
+      isShow: false,
     });
+    // 开启定时器
+    this.countDown();
   };
+  // 重新获取验证码
+  repeatGetNum() {
+    this.countDown();
+  }
+  //  开启获取验证码的定时器
+  countDown() {
+    if (this.state.isLoading) {
+      return;
+    }
+    this.setState({isLoading: true});
+    let seconds = 5;
+    this.setState({btnText: `重新获取${seconds}s`});
+    let timeId = setInterval(() => {
+      seconds--;
+      this.setState({btnText: `重新获取${seconds}s`});
+      if (seconds == 0) {
+        clearInterval(timeId);
+        this.setState({btnText: `重新获取`,isLoading: false});
+      }
+    }, 1000);
+  }
   // 渲染验证码部分
   renderCode() {
     return (
@@ -70,6 +96,7 @@ export default class Login extends Component {
               code,
             });
           }}
+          onSubmitEditing={this.login}
           keyboardType={'number-pad'} // 数字键盘
           rootStyle={{
             marginBottom: 20,
@@ -87,10 +114,11 @@ export default class Login extends Component {
           }}
         />
         <RNButton
+          disabled={this.state.isLoading}
           textColor={'#fff'}
-          title={'重新获取 '}
+          title={this.state.btnText}
           btnEvent={() => {
-            this.getPhoneNum();
+            this.repeatGetNum();
           }}></RNButton>
       </>
     );
@@ -98,7 +126,7 @@ export default class Login extends Component {
   // 渲染按钮
   renderBtn = () => {
     const {tel, isShow} = this.state;
-
+alert(1)
     return (
       // <View style={{justifyContent: 'center', flexDirection: 'row'}}>
       <>
@@ -114,6 +142,7 @@ export default class Login extends Component {
           placeholder="请输入手机号"
         />
         <RNButton
+
           textColor={'#fff'}
           title={'获取手机号验证码'}
           btnEvent={() => {
@@ -122,10 +151,23 @@ export default class Login extends Component {
       </>
     );
   };
+  // 登录
+  login = ()=>{
+    if(this.state.code.length!==4){
+      alert('验证码错误')
+      return
+    }
+    let params = {
+      tel:this.state.tel,
+      code:this.state.code,
+      codeId:Math.random()
+    }
+    alert(JSON.stringify(params))
+    this.props.navigation.navigate("UserInfo")
+  }
 
   render() {
     const {tel, isShow} = this.state;
-
     return (
       <View>
         <StatusBar

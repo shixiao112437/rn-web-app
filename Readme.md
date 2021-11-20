@@ -111,6 +111,20 @@ export const pxToWidth = (width) => {
 */
 
 
-````
+```
 
 3. 验证码组件`react-native-confirmation-code-field`
+4. 使用字体图标`yarn  add  react-native-svg-uri react-native-svg`
+
+```javascript
+  import SvgUri from 'react-native-svg-uri';
+  // svgXmlData为字体图标的svg代码
+  <SvgUri width="23" height="23" svgXmlData={svgXmlData}></SvgUri>
+```
+5. 时间选择组件`react-native-datepicker`
+```javascript
+  import DatePicker from 'react-native-datepicker';
+ 
+```
+6. 
+`keytool  -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000`
