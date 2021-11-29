@@ -4,13 +4,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './pages/auth/login';
 import Home from './pages/home/index';
-import UserInfo from './pages/auth/user/UserInfo';
+import UserInfo from './pages/auth/user'
 const Stack = createNativeStackNavigator();
 function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen
+      <Stack.Navigator initialRouteName="Login">
+      { <Stack.Screen
           headerBackVisible={true}
           headerShown={false}
           options={{
@@ -26,7 +26,7 @@ function Nav() {
           }}
           name="UserInfo"
           component={UserInfo}
-        />
+        /> }
         <Stack.Screen
           headerShown={false}
           options={{

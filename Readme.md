@@ -109,8 +109,6 @@ export const pxToWidth = (width) => {
     start 就是渐变开始的位置，x、y 范围是 0 - 1 ，
     end 同上，就是渐变结束的位置 
 */
-
-
 ```
 
 3. 验证码组件`react-native-confirmation-code-field`
@@ -118,7 +116,7 @@ export const pxToWidth = (width) => {
 
 ```javascript
   import SvgUri from 'react-native-svg-uri';
-  // svgXmlData为字体图标的svg代码
+  // svgXmlData为字体图标的svg代码(可在网站上直接复制svg代码)
   <SvgUri width="23" height="23" svgXmlData={svgXmlData}></SvgUri>
 ```
 5. 时间选择组件`react-native-datepicker`
@@ -126,5 +124,52 @@ export const pxToWidth = (width) => {
   import DatePicker from 'react-native-datepicker';
  
 ```
-6. 
-`keytool  -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000`
+6. 高德地图使用`react-native-amap-geolocation`
+  - . 在.android目录下获取发布版sha1`keytool -genkey -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000`
+  - . `keytool -list -v -keystore my-release-key.keystore`
+  - . 获取发布版sha1 在项目 android/app下 `keytool -list -v -keystore debug.keystore` (该目录下有debug.keystore文件) `keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000`(生成debug.keystore)
+  - . 使用高德api `npm i react-native-amap-geolocation` 然后进行配置`npx react-native link react-native-amap-geolocation` (或手动配置 rn版本过低)
+  - . 在官网中获取key(创建应用获取sha1 packagename)
+  - 初始化 参考 `util/geo.js`
+7. `npm i  react-native-picker`
+```javascript
+  import Picker from 'react-native-picker';
+   Picker.init({
+      pickerData: [{ a: [1, 2, 2, 3] }],
+      selectedValue: ["北京", "北京"],
+      wheelFlex: [1, 1, 0], // 显示省和市
+      pickerConfirmBtnText: "确定",
+      pickerCancelBtnText: "取消",
+      pickerTitleText: "选择城市",
+      onPickerConfirm: data => {
+        // data =  [广东，广州，天河]
+        console.log(this.state)
+        this.setState(
+          {
+            location: data[1]
+          }
+        );
+      }
+    });
+    Picker.show();
+```
+8. rn中显示动态图(请查看最新版文档) 可能会报错 `com.facebook.fresco`相关错误
+
+```json
+// 在在 Android 上支持 GIF 和 WebP 格式图片
+// 默认情况下 Android 是不支持 GIF 和 WebP 格式的。你需要在android/app/build.gradle文件中根据需要手动添加以下模块：
+dependencies {
+  // If your app supports Android versions before Ice Cream Sandwich (API level 14)
+  implementation 'com.facebook.fresco:animated-base-support:1.3.0'
+
+  // For animated GIF support
+  implementation 'com.facebook.fresco:animated-gif:2.5.0'
+
+  // For WebP support, including animated WebP
+  implementation 'com.facebook.fresco:animated-webp:2.5.0'
+  implementation 'com.facebook.fresco:webpsupport:2.5.0'
+
+  // For WebP support, without animations
+  implementation 'com.facebook.fresco:webpsupport:2.5.0'
+}
+```

@@ -14,6 +14,8 @@ target 'webApp' do
 
   pod 'react-native-amap-geolocation', :path => '../node_modules/react-native-amap-geolocation'
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'webAppTests' do
     inherit! :complete
     # Pods for testing

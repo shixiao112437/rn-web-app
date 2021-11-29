@@ -24,7 +24,7 @@ var styles = StyleSheet.create({
 class RNButton extends Component {
   render() {
     return (
-      <TouchableOpacity disabled={this.props.disabled} onPress={this.props.btnEvent}>
+      <TouchableOpacity style={{...this.props.style}} disabled={this.props.disabled} onPress={this.props.btnEvent}>
         <LinearGradient
           start={{x: 0, y: 0}}
           end={{x: 1, y: 0}}

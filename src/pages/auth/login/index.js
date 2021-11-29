@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {Text, View, Image, StyleSheet, StatusBar} from 'react-native';
-import {Button, Input} from 'react-native-elements';
-import {pxToWidth} from '../../../util/styl';
-import {CodeField, Cursor} from 'react-native-confirmation-code-field';
+import React, { Component } from 'react';
+import { Text, View, Image, StyleSheet, StatusBar } from 'react-native';
+import { Button, Input,Overlay } from 'react-native-elements';
+import { pxToWidth } from '../../../util/styl';
+import { CodeField, Cursor } from 'react-native-confirmation-code-field';
 import RNButton from '../../../components/RNButton/index';
 const styly = StyleSheet.create({
   bgLogin: {
@@ -16,9 +16,9 @@ const styly = StyleSheet.create({
     fontSize: pxToWidth(20),
     color: '#dfc026',
   },
-  root: {flex: 1, padding: 20},
-  title: {textAlign: 'center', fontSize: 30},
-  codeFieldRoot: {marginTop: 20},
+  root: { flex: 1, padding: 20 },
+  title: { textAlign: 'center', fontSize: 30 },
+  codeFieldRoot: { marginTop: 20 },
   cell: {
     width: 40,
     height: 40,
@@ -48,6 +48,7 @@ export default class Login extends Component {
     code: '',
     btnText: '重新获取',
     isLoading: false,
+    visible: false
   };
   getPhoneNum = () => {
     alert('获取手机验证码');
@@ -57,6 +58,7 @@ export default class Login extends Component {
     // 开启定时器
     this.countDown();
   };
+  // 
   // 重新获取验证码
   repeatGetNum() {
     this.countDown();
@@ -66,15 +68,15 @@ export default class Login extends Component {
     if (this.state.isLoading) {
       return;
     }
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     let seconds = 5;
-    this.setState({btnText: `重新获取${seconds}s`});
+    this.setState({ btnText: `重新获取${seconds}s` });
     let timeId = setInterval(() => {
       seconds--;
-      this.setState({btnText: `重新获取${seconds}s`});
+      this.setState({ btnText: `重新获取${seconds}s` });
       if (seconds == 0) {
         clearInterval(timeId);
-        this.setState({btnText: `重新获取`,isLoading: false});
+        this.setState({ btnText: `重新获取`, isLoading: false });
       }
     }, 1000);
   }
@@ -103,7 +105,7 @@ export default class Login extends Component {
           }}
           // textContentType={'oneTimeCode'}
           cellCount={4}
-          renderCell={({index, symbol, isFource}) => {
+          renderCell={({ index, symbol, isFource }) => {
             return (
               <Text
                 style={[styly.cell, isFource && styly.focusCell]}
@@ -120,13 +122,30 @@ export default class Login extends Component {
           btnEvent={() => {
             this.repeatGetNum();
           }}></RNButton>
+        <Overlay animated='slide' isVisible={this.state.visible}>
+        <RNButton
+          textColor={'#fff'}
+          title={'跳转用户信息'}
+          btnEvent={() => {
+            this.setState({ visible:false },()=>{
+              this.props.navigation.navigate("UserInfo")
+            });
+          }}></RNButton>
+             <RNButton
+          textColor={'#fff'}
+          title={'跳转首页'}
+          btnEvent={() => {
+            this.setState({ visible:false },()=>{
+              this.props.navigation.navigate("Home")
+            });
+          }}></RNButton>
+        </Overlay>
       </>
     );
   }
   // 渲染按钮
   renderBtn = () => {
-    const {tel, isShow} = this.state;
-alert(1)
+    const { tel, isShow } = this.state;
     return (
       // <View style={{justifyContent: 'center', flexDirection: 'row'}}>
       <>
@@ -135,9 +154,9 @@ alert(1)
           keyboardType="phone-pad"
           maxLength={11}
           value={tel}
-          leftIcon={{type: 'font-awesome', name: 'comment'}}
+          leftIcon={{ type: 'font-awesome', name: 'comment' }}
           onChangeTex={tel => {
-            this.setState({tel});
+            this.setState({ tel });
           }}
           placeholder="请输入手机号"
         />
@@ -152,22 +171,23 @@ alert(1)
     );
   };
   // 登录
-  login = ()=>{
-    if(this.state.code.length!==4){
+  login = () => {
+    if (this.state.code.length !== 4) {
       alert('验证码错误')
       return
     }
     let params = {
-      tel:this.state.tel,
-      code:this.state.code,
-      codeId:Math.random()
+      tel: this.state.tel,
+      code: this.state.code,
+      codeId: Math.random()
     }
-    alert(JSON.stringify(params))
-    this.props.navigation.navigate("UserInfo")
+    this.setState({ visible:true  });
+    // alert(JSON.stringify(params))
+    // this.props.navigation.navigate("UserInfo")
   }
 
   render() {
-    const {tel, isShow} = this.state;
+    const { tel, isShow } = this.state;
     return (
       <View>
         <StatusBar

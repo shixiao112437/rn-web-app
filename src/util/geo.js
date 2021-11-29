@@ -6,22 +6,21 @@ class Geo {
     // if (Platform.OS === "android") {
     //   await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION);
     // }
-    let res =await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-      ]);
-      console.log('权限',res)
-   let b=  await init({
-      android: "1482130b5667f469fc20cbf52c70eca2",
+    let res = await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+    ]);
+    console.log('权限', res)
+    let b = await init({
+      android: "d1efb85914095f9937707f4da453b745",
+      ios: "d1efb85914095f9937707f4da453b745"
     });
-    console.log('初始化',b)
     return Promise.resolve();
   }
   async getCurrentPosition() {
     return new Promise((resolve, reject) => {
       console.log("开始定位");
       Geolocation.getCurrentPosition((res) => {
-          console.log('weizhi',res)
         resolve(res);
       }, reject);
     })
