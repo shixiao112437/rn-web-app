@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Home">
       { <Stack.Screen
           headerBackVisible={true}
           headerShown={false}
@@ -47,9 +47,22 @@ function Nav() {
           component={Login}
         />
         <Stack.Screen
-        headerShown={false}
-        name='Home'
-        component={Home}
+          headerBackVisible={true}
+          headerShown={false}
+          name='Home'
+          options={{
+            headerShown:false,
+            title: '用户信息',
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#dfc026',
+            },
+            headerTitleStyle: {
+              color: '#fff',
+              fontWeight: 'bold',
+            },
+          }}
+          component={Home}
         />
 
      
