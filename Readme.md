@@ -177,3 +177,6 @@ dependencies {
 
 9. 使用tab组件`import TabNavigator from 'react-native-tab-navigator';` 案列/home/index.js
  注意: 要给`TabNavigator`的父容器加高度(  flex:1)
+
+10. 吸顶效果 `import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view'` 看文档
+项目使用路径(pages/home/components/Friend.js)

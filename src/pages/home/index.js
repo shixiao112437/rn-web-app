@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Alert, StyleSheet, Image } from 'react-native';
+import {ScrollView, View, Text, TouchableOpacity, Alert, StyleSheet, Image } from 'react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import SvgUri from 'react-native-svg-uri';
 import {
@@ -12,8 +12,8 @@ import {
   wode,
   wodeSelected,
 } from '../../util/iconfont'; //../../../util/iconfont
-import Friend from './components/Friend';
-import Circle from './components/circle';
+import Friends from './components/Friend';
+import Circle from './components/Circle';
 import My from './components/My';
 import Message from './components/Message';
 const styles = StyleSheet.create({
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
 export default class index extends Component {
   state = {
-    selectedTab: "设置"
+    selectedTab: "交友"
   }
   render() {
     return (
@@ -50,7 +50,7 @@ export default class index extends Component {
             renderIcon={() => <SvgUri width={20} height={20} svgXmlData={jiaoyou} />}
             renderSelectedIcon={() => <SvgUri width={20} height={20} svgXmlData={jiaoyouSelected} />}
             onPress={() => this.setState({ selectedTab: '交友' })}>
-            <Friend></Friend>
+            <Friends></Friends>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === '圈子'}
