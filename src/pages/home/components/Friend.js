@@ -4,7 +4,7 @@ import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header
 import { yongbao, linghun, dingwei, shaixuan, xiaoxi } from '../../../util/iconfont'
 import SvgUri from 'react-native-svg-uri'
 import { Overlay } from 'react-native-elements'
-// import moduleName from 'module'
+import {NavigationContext} from '@react-navigation/native'
 import RNButton from '../../../components/RNButton';
 
 const style = StyleSheet.create({
@@ -18,22 +18,40 @@ const style = StyleSheet.create({
     }
 })
 export default class Friends extends Component {
+    //  导航上下文
+    static contextType = NavigationContext; // 将navigation挂载在this上(this.context)
     state = {
         isShow: false,
         List: []
     }
+    pageJump(name){
+        this.context.navigate(name)
+    }
     renderNavs = () => {
         return (
             <>
-                <View style={{ ...style.navWrap, backgroundColor: "red" }}>
-                    <SvgUri width={40} height={40} svgXmlData={yongbao} />
-                </View>
-                <View style={{ ...style.navWrap, backgroundColor: "blue" }}>
-                    <SvgUri width={40} height={40} svgXmlData={dingwei} />
-                </View>
-                <View style={{ ...style.navWrap, backgroundColor: "yellow" }}>
-                    <SvgUri width={40} height={40} svgXmlData={linghun} />
-                </View>
+                <TouchableOpacity onPress={()=>{
+                    this.pageJump('Tanhua')
+                }}>
+                    <View style={{ ...style.navWrap, backgroundColor: "red" }}>
+                        <SvgUri width={40} height={40} svgXmlData={yongbao} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+
+                    <View style={{ ...style.navWrap, backgroundColor: "blue" }}>
+                        <SvgUri width={40} height={40} svgXmlData={dingwei} />
+                    </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+
+                    <View style={{ ...style.navWrap, backgroundColor: "yellow" }}>
+                        <SvgUri width={40} height={40} svgXmlData={linghun} />
+                    </View>
+                </TouchableOpacity>
+
             </>
         )
     }
@@ -95,7 +113,7 @@ export default class Friends extends Component {
                 justifyContent: "flex-end",
                 padding: 0
             }} fullScreen={true} isVisible={this.state.isShow}>
-                <View style={{ backgroundColor: '#fff', height: 500,paddingTop:50 }}>
+                <View style={{ backgroundColor: '#fff', height: 500, paddingTop: 50 }}>
                     <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 10 }}>
                         <Text>性别</Text>
                     </View>
@@ -122,5 +140,8 @@ export default class Friends extends Component {
             </Overlay>
         )
 
+    }
+    componentDidMount(){
+        console.log(this.context,1111111111111)
     }
 }

@@ -180,3 +180,40 @@ dependencies {
 
 10. 吸顶效果 `import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view'` 看文档
 项目使用路径(pages/home/components/Friend.js)
+
+11. 在非路由组件内使用navigation对象(路由跳转)
+  + 使用导航上下文类组件
+  ```jsx
+  import { NavigationContext } from '@react-navigation/native';
+
+  class SomeComponent extends React.Component {
+    static contextType = NavigationContext;
+    render() {
+      const navigation = this.context; // 
+    }
+  }
+  ```
+  + 使用导航上下文函数组件
+   ```jsx
+  import { NavigationContext } from '@react-navigation/native';
+    function SomeComponent() {
+    // We can access navigation object via context
+    const navigation = React.useContext(NavigationContext);
+    }
+  ```
+  + react web对比
+   ```jsx
+    import {withRouter} from 'react-router-dom'
+    class A {
+       pageJump(name){
+       this.props.history.push(name) 
+       }
+    }
+   ```
+   + 
+
+
+
+
+
+  

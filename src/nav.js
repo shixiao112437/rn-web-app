@@ -1,16 +1,17 @@
-import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './pages/auth/login';
 import Home from './pages/home/index';
 import UserInfo from './pages/auth/user'
+import Tanhua from './pages/tanhua'
 const Stack = createNativeStackNavigator();
 function Nav() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-      { <Stack.Screen
+        <Stack.Screen
           headerBackVisible={true}
           headerShown={false}
           options={{
@@ -26,7 +27,7 @@ function Nav() {
           }}
           name="UserInfo"
           component={UserInfo}
-        /> }
+        />
         <Stack.Screen
           headerShown={false}
           options={{
@@ -51,7 +52,7 @@ function Nav() {
           headerShown={false}
           name='Home'
           options={{
-            headerShown:false,
+            headerShown: false,
             title: '用户信息',
             headerTitleAlign: 'center',
             headerStyle: {
@@ -64,9 +65,17 @@ function Nav() {
           }}
           component={Home}
         />
+        <Stack.Screen 
+          name='Tanhua'
+          component={Tanhua}
+          options={{
+            title:"探花交友"
+          }}
+        
+        />
 
-     
-     
+
+
       </Stack.Navigator>
 
       {/* <Stack.Screen name='Home' component={Home}></Stack.Screen> */}
