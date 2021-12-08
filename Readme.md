@@ -212,6 +212,8 @@ dependencies {
    ```
    + 
 
+12. `mapDispatchToProps`说明
+  + 
 
 
 

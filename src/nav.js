@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           headerBackVisible={true}
           headerShown={false}

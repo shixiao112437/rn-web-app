@@ -5,6 +5,8 @@ import {View, Text, Button} from 'react-native';
 import Nav from './src/nav';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Provider} from 'react-redux'
+import store from './src/redux/index';
 
 function HomeScreen(props) {
   const navJump = () => {
@@ -81,7 +83,9 @@ function App1() {
 }
 function App() {
   return <View style={{flex:1}}>
+    <Provider store={store}>
     <Nav></Nav>
+    </Provider>
   </View>
   
 }

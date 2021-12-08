@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet, StatusBar } from 'react-native';
-import { Button, Input,Overlay } from 'react-native-elements';
+import {  Input,Overlay } from 'react-native-elements';
 import { pxToWidth } from '../../../util/styl';
 import { CodeField, Cursor } from 'react-native-confirmation-code-field';
 import RNButton from '../../../components/RNButton/index';
+import {connect} from 'react-redux'
+import {setTokenAction,asyncSetToken} from '../../../redux/actions/index'
 const styly = StyleSheet.create({
   bgLogin: {
     width: '100%',
@@ -41,7 +43,7 @@ const styly = StyleSheet.create({
     fontSize: 16,
   },
 });
-export default class Login extends Component {
+ class Login extends Component {
   state = {
     tel: '15830104417',
     isShow: true,
@@ -197,6 +199,22 @@ export default class Login extends Component {
         <Image
           style={styly.bgLogin}
           source={require('../../../assets/images/loginBg.jpg')}></Image>
+          <Text onPress={()=>{
+         
+            this.props.setToken('wiiiiiiiiiiii')
+          
+          }}>
+            {this.props.token}
+          </Text>
+          <Text onPress={()=>{
+        
+            this.props.asyncSetToken('kkkk')
+          
+          }}>
+            异步修改--------------{this.props.token}
+          </Text>
+
+
 
         <View style={styly.loginTitle}>
           {isShow ? this.renderBtn() : this.renderCode()}
@@ -205,3 +223,25 @@ export default class Login extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  console.log(state,'nnnnnnnnn')
+  return {
+    token:state.tokenReduce.token
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setToken:(token)=>{
+      dispatch(setTokenAction(token))
+    },
+    asyncSetToken:(token)=>{
+      dispatch(asyncSetToken(token))
+    }
+  }
+}
+/* 
+mapStateToProps,mapDispatchToProps 都是函数返回一个对象映射在props上
+
+
+*/
+export default connect(mapStateToProps,mapDispatchToProps)(Login)
