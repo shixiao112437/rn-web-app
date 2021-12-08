@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Tanhua">
         <Stack.Screen
           headerBackVisible={true}
           headerShown={false}
@@ -69,7 +69,8 @@ function Nav() {
           name='Tanhua'
           component={Tanhua}
           options={{
-            title:"探花交友"
+            title:"探花交友",
+            headerShown:false
           }}
         
         />
