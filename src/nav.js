@@ -6,11 +6,12 @@ import Login from './pages/auth/login';
 import Home from './pages/home/index';
 import UserInfo from './pages/auth/user'
 import Tanhua from './pages/tanhua'
+import Detail from './pages/detail'
 const Stack = createNativeStackNavigator();
 function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Tanhua">
+      <Stack.Navigator initialRouteName="Detail">
         <Stack.Screen
           headerBackVisible={true}
           headerShown={false}
@@ -75,7 +76,15 @@ function Nav() {
         
         />
 
-
+      <Stack.Screen 
+          name='Detail'
+          component={Detail}
+          options={{
+            title:"用户详情",
+            headerShown:false
+          }}
+        
+        />
 
       </Stack.Navigator>
 

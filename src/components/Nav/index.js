@@ -26,9 +26,18 @@ export default class NavTop extends Component {
                         {this.props.children}
                     </Text>
                     <View>
+                    <TouchableOpacity onPress={()=>{
+                        console.log(this.context)
+                        this.context.push('Login')
+                    }}>
+                        <Text style={{fontWeight:"bold",color:'#fff',fontSize:pxToWidth(15)}}>登录页</Text>
+                    </TouchableOpacity>
                     </View>
                 </ImageBackground>
             </View>
         )
+    }
+    componentDidMount(){
+        console.log(this.context)
     }
 }

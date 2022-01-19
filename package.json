@@ -18,6 +18,7 @@
     "react-native-amap-geolocation": "^1.1.2",
     "react-native-confirmation-code-field": "^7.1.0",
     "react-native-datepicker": "^1.7.2",
+    "react-native-deck-swiper": "^2.0.5",
     "react-native-elements": "^3.4.2",
     "react-native-image-crop-picker": "^0.37.2",
     "react-native-image-header-scroll-view": "^1.0.0",
